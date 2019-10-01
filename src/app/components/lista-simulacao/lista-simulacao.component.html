@@ -1,0 +1,75 @@
+<section>
+    <div class="container-fluid">
+        <div class="row mt-3">
+            <div class="col-md-12 col-xs-12 text-center">
+                <h3 class="text-muted">Simulações</h3>
+            </div>
+        </div>
+        <hr>
+
+    </div>
+</section>
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3" *ngFor="let item of listaSimulacao">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h6 class="card-title">Valor Financiado: {{item.valorCompra | currency:'R$'}}</h6>
+                        <h6 class="card-subtitle mb-2 ">Valor Juros: {{item.valorJuros}}%</h6>
+                        <h6 class="card-subtitle mb-2 ">Quantidade de Parcelas: {{item.qtdParcelas}}</h6>
+                        <h6 class="card-subtitle mb-2 ">Data da Compra: {{item.dataCompra | date:'dd/MM/yyy'}}</h6>
+
+                        <a style="cursor: pointer" (click)="detalhes(detSimulacao,item.id)" class="card-link text-info">Detalhes</a>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal Add Fornecedor -->
+<div class="modal fade" bsModal #detSimulacao="bs-modal" tabindex="-1" role="dialog" aria-labelledby="bsModalLabel" aria-hidden="false">
+    <div style="width: 90%; margin: 20px auto auto;" class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Detalhes da Simulação</h4>
+                <button type="button" class="close" aria-label="Close" (click)="detSimulacao.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table>
+                            <tbody>
+                                    <th scope="row">Valor total: {{getTotalParcela(parcelas) | currency: 'R$ '}}</th>
+                            </tbody>
+                        </table>
+                      <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                
+                                            <th scope="col">Parcela</th>
+                                            <th scope="col">Data Vencimento</th>
+                                            <th scope="col">Valor da parcela</th>
+                                       
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let parcela of parcelas">
+                                            <th scope="row">{{parcela.parcela}}</th>
+                                            <td>{{parcela.dataVencimento | date:'dd/MM/yyy'}}</td>
+                                            <td>{{parcela.valorParcela | currency:'R$ '}}</td>
+                                            
+                                        </tr>
+                                    </tbody>
+                                
+                                </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

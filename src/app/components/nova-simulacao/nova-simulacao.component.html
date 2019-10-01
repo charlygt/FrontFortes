@@ -1,0 +1,83 @@
+<section>
+    <div class="container-fluid">
+        <div class="row mt-3">
+            <div class="col-md-12 col-xs-4  text-center" >
+                <h3 class="text-muted">Simulação de Juros</h3>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <ul *ngFor="let erro of erros">
+                <li class="text-danger">
+                    {{erro}}
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label>Valor da Compra</label>
+                <input type="number" class="form-control" [(ngModel)]="simulacao.ValorCompra" />
+            </div>
+            <div class="col-md-3">
+                <label>Valor dos Juros </label>
+                <input type="text" class="form-control" [(ngModel)]="simulacao.ValorJuros" />
+            </div>
+            <div class="col-md-3">
+                <label>Parcelas</label>
+                <input type="number" class="form-control" min="1" max="100" [(ngModel)]="simulacao.QtdParcelas" />
+            </div>
+            <div class="col-md-3">
+                <label>Data da Compra</label>
+                <input type="date" class="form-control" [(ngModel)]="simulacao.DataCompra" />
+            </div>
+        </div>
+        <div class="row-fluid mt-3 mb-3">
+            <button class="btn btn-primary btn-block" (click)="simular()"><i class="fa fa-percent"></i> Simular</button>
+        </div>
+    </div>
+</section>
+<section *ngIf="showSimulacao">
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <table>
+                        <div class="row-fluid mt-3 mb-3">
+                                <button class="btn btn-success btn-block mb-3" (click)="salvarSimulacao()"><i class="fa fa-percent"></i> Salvar Simulação</button>
+                                <div class="pull-right h6">
+                                    Valor Total da Compra
+                                    {{simulacao.getMontanteComposto() | currency:'R$ '}}
+                                </div>
+                                <div class="pull-right h6">
+                                        Valor Total de Juros
+                                        {{simulacao.ObterValorJurosMontante() | currency:'R$ '}}
+                                    </div>
+                            </div>
+                </table>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+
+                            <th scope="col">Parcela</th>
+                            <th scope="col">Data Vencimento</th>
+                            <th scope="col">Valor da parcela</th>
+                            <th scope="col">Valor do juros</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let parcela of parcelas">
+                            <th scope="row">{{parcela.Parcela}}</th>
+                            <td>{{parcela.DataVencimento | date:'dd/MM/yyy'}}</td>
+                            <td>{{parcela.ValorParcela | currency:'R$ '}}</td>
+                            <td>{{simulacao.ObterValorJurosParcela()  | currency:'R$ '}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+           
+        </div>
+    </div>
+
+</section>
