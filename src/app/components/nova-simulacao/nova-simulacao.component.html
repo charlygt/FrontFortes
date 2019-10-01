@@ -19,11 +19,11 @@
                 <input type="number" class="form-control" [(ngModel)]="simulacao.ValorCompra" />
             </div>
             <div class="col-md-3">
-                <label>Valor dos Juros </label>
+                <label>Valor Juros %  </label>
                 <input type="text" class="form-control" [(ngModel)]="simulacao.ValorJuros" />
             </div>
             <div class="col-md-3">
-                <label>Parcelas</label>
+                <label>Qtde de Parcelas</label>
                 <input type="number" class="form-control" min="1" max="100" [(ngModel)]="simulacao.QtdParcelas" />
             </div>
             <div class="col-md-3">
@@ -62,7 +62,7 @@
                             <th scope="col">Parcela</th>
                             <th scope="col">Data Vencimento</th>
                             <th scope="col">Valor da parcela</th>
-                            <th scope="col">Valor do juros</th>
+                            <th scope="col">Valor de juros</th>
                         </tr>
                     </thead>
                     <tbody>
